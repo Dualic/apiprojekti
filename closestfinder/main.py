@@ -13,7 +13,7 @@ def findclosest(request):
 
     while True:
         query = f"SELECT name FROM `week9-2-323806.Breweries.names` WHERE (longitude BETWEEN ({approxlongitude}-{margin}) AND ({approxlongitude}+{margin})) AND (latitude BETWEEN ({approxlatitude}-{margin}) AND ({approxlatitude}+{margin})) LIMIT 1"
-        query_job = client.query(query)  # Make an API request.
+        query_job = client.query(query) 
         for x in query_job:
             data = x[0]
         if data == "":
