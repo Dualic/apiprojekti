@@ -28,3 +28,14 @@ paths:
           description: A successful response
           schema:
             type: string
+  /find:
+    post:
+      summary: Gives a name of a brewery that is close to the given coordinates
+      operationId: findpub
+      x-google-backend:
+        address: https://europe-west2-week9-2-323806.cloudfunctions.net/closestfinder
+      responses:
+        '200':
+          description: No errors
+          schema:
+            type: string
