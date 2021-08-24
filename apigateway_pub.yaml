@@ -28,6 +28,25 @@ paths:
           description: A successful response
           schema:
             type: string
+  /pubday/{name_of_the_pub}:    
+    get:
+      parameters:
+        - in: path
+          name: name_of_the_pub
+          required: true
+          type: string
+          minimum: 1
+          description: The name of the pub
+      summary: Get satellite-results for a pub in one day
+      operationId: satpubforday
+      x-google-backend:
+        address: https://us-central1-week9-2-323806.cloudfunctions.net/get_satellites_poc-1-days
+        path_translation: CONSTANT_ADDRESS
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
   /find:
     post:
       summary: Gives a name of a brewery that is close to the given coordinates
