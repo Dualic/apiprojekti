@@ -15,25 +15,14 @@ def get_satellites(parameter):
 
     pubsname = parameter.args.get('name_of_the_pub')
 
-    # edit pub name
-
-    list_name = re.findall('[A-Z][^A-Z]*', pubsname)
-
-    edited_name = ""
-
-    for word in list_name:
-        edited_name+=word + " "
-
-    final_name = edited_name.strip()
-
     # Query lat and lon from BigQuery table
 
     client = bigquery.Client()
   
-    query = """SELECT latitude,longitude FROM `week9-2-323806.Breweries.names` WHERE name = @var """
+    query = """SELECT latitude,longitude FROM `week9-2-323806.Breweries.namesfinal` WHERE name = @var """
 
     job_config = bigquery.QueryJobConfig(
-      query_parameters=[bigquery.ScalarQueryParameter("var", "STRING", final_name),]
+      query_parameters=[bigquery.ScalarQueryParameter("var", "STRING", pubsname),]
     )
 
     query_job = client.query(query, job_config=job_config)  # Make an API request.
@@ -63,9 +52,9 @@ def get_satellites(parameter):
     datareq = requests.get(URL)
     data = datareq.json()
     times = str(len(data))
-    #myjson = json.dumps(data)
+    
 
-    return f"Your boss has {times} chances today to catch you drinking beers!"
+    return f"Today your boss has {times} chances to catch you drinking beers!"
 
-#SELECT latitude,longitude FROM `week9-2-323806.Breweries.names` WHERE name = 'Gravel Bottom Craft Brewery'
+
 
