@@ -30,8 +30,8 @@ paths:
             type: string
         '500':
           description: Error in query. Maybe there is no pub of such name
-            schema:
-              type: string
+          schema:
+            type: string
   /pubday/{name_of_the_pub}:    
     get:
       parameters:
@@ -53,8 +53,8 @@ paths:
             type: string
         '500':
           description: Error in query. Maybe there is no pub of such name
-            schema:
-              type: string
+          schema:
+            type: string
   /find:
     post:
       summary: Gives a name of a brewery that is close to the given coordinates
@@ -68,5 +68,5 @@ paths:
             type: string
         '500':
           description: Error in JSON. Please provide the POST request with JSON style {"longitude":-85.48, "latitude":42.95}
-            schema:
-              type: string
+          schema:
+            type: string
