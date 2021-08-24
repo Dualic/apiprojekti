@@ -3,7 +3,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 
 #Example function json payload required:
-#{"longitude":"-85.48", "latitude": "42.95"}
+#{"longitude":-85.48, "latitude": 42.95}
 def findclosest(request):
     request_json = request.get_json(silent=True)
     approxlongitude = float(request_json.get("longitude"))
