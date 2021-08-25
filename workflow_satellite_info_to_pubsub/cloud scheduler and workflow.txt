@@ -1,0 +1,5 @@
+gcloud scheduler jobs create http getbeerinfo1 \
+   --schedule="0 16 * * *" \
+  --uri="https://workflowexecutions.googleapis.com/v1/projects/week9-2-323806/locations/europe-west4/workflows/alert_friends_about_beer/executions" \
+  --message-body={} \
+  --oauth-service-account-email="workflowinvoker@week9-2-323806.iam.gserviceaccount.com"

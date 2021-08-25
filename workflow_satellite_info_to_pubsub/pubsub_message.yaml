@@ -1,0 +1,37 @@
+main:
+  steps:
+    - getSatellites1day:
+        call: http.get
+        args:
+            url: https://pub-api-gateway-8yny0kuq.ew.gateway.dev/pubday/GravelBottomCraftBrewery
+        result: output
+    
+    - encode_message:
+        call: encode
+        args:
+          input: ${output["body"]}
+        result: encoded_output
+    #- print_encoded:
+    #    return: ${encoded_output}
+
+    - publish_message_to_topic:
+        call: googleapis.pubsub.v1.projects.topics.publish
+        args:
+          topic: "projects/week9-2-323806/topics/tellfriendsaboutbeer"
+          body:
+            messages:
+              - data: ${encoded_output}
+
+    - the_end:
+        return: "message sent"  
+
+    
+    
+    
+
+
+encode:
+  params: [input]
+  steps:
+    - first:
+        return: ${base64.encode(text.encode(input))}
