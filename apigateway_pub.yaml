@@ -9,6 +9,20 @@ schemes:
 produces:
   - application/json
 paths:
+  /index:
+    get:
+      summary: Shows a static website form a cloud storage bucket
+      operationId: staticindex
+      produces:
+        - text/html; charset=utf-8
+      x-google-backend:
+        address: https://storage.googleapis.com/apiprojekti/publicstaticwebsite/index.html
+      responses:
+        '200':
+          description: Got the page
+          schema:
+            type: string
+
   /pub/{name_of_the_pub}:    
     get:
       parameters:

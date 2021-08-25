@@ -1,0 +1,16 @@
+<h1>Welcome to our website!</h1>
+<p>There are several paths that have different functions. Here is a quick guide how to use this API.</p>
+<h3>/pub/name_of_the_pub</h3>
+<p>Gives a GET-response. Insert the name of the pub to view the next time when a ICEYE satellite passes over that pub.</p>
+<p>Example use:</p>
+<p>/pub/GravelBottomCraftBrewery</p>
+<h3>/pubday/name_of_the_pub</h3>
+<p>Gives GET-response. Insert the name of the pub to view how many ICEYE satellites will pass over that pub over the next day.</p>
+<p>Example use:</p>
+<p>/pubday/TorrentBrewingCo</p>
+<h3>/find</h3>
+<p>Needs a POST. Give it the approximate longitude and latitude coordinates. Returns the name of a close by pub or says there are no close by pubs. Check slightly over 300 km radius (3.2 degrees in both coordinates).</p>
+<p>Example POST JSON-payload:</p>
+<p>{"longitude":-69.8, "latitude": 43.9}</p>
+<p>Example linux CURL:</p>
+<p>curl -X POST https://pub-api-gateway-8yny0kuq.ew.gateway.dev/find -H 'Content-Type: application/json' -d '{"longitude":-69.8, "latitude": 43.9}'</p>
