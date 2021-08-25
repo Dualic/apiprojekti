@@ -1,0 +1,72 @@
+
+swagger: '2.0'
+info:
+  title: pub-api
+  description: Sample API on API Gateway with a Google Cloud Functions backend
+  version: 1.0.0
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /pub/{name_of_the_pub}:    
+    get:
+      parameters:
+        - in: path
+          name: name_of_the_pub
+          required: true
+          type: string
+          minimum: 1
+          description: The name of the pub
+      summary: Get satellite-results for a pub
+      operationId: satpub
+      x-google-backend:
+        address: https://us-central1-week9-2-323806.cloudfunctions.net/get_satellites_poc 
+        path_translation: CONSTANT_ADDRESS
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+        '500':
+          description: Error in query. Maybe there is no pub of such name
+          schema:
+            type: string
+  /pubday/{name_of_the_pub}:    
+    get:
+      parameters:
+        - in: path
+          name: name_of_the_pub
+          required: true
+          type: string
+          minimum: 1
+          description: The name of the pub
+      summary: Get satellite-results for a pub in one day
+      operationId: satpubforday
+      x-google-backend:
+        address: https://us-central1-week9-2-323806.cloudfunctions.net/get_satellites_poc-1-days
+        path_translation: CONSTANT_ADDRESS
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+        '500':
+          description: Error in query. Maybe there is no pub of such name
+          schema:
+            type: string
+  /find:
+    post:
+      summary: Gives a name of a brewery that is close to the given coordinates
+      operationId: findpub
+      x-google-backend:
+        address: https://europe-west2-week9-2-323806.cloudfunctions.net/closestfinder
+      responses:
+        '200':
+          description: No errors
+          schema:
+            type: string
+        '500':
+          description: Error in JSON. Please provide the POST request with JSON style {"longitude":-85.48, "latitude":42.95}
+          schema:
+            type: string
