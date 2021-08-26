@@ -3,8 +3,8 @@ swagger: '2.0'
 info:
   title: pub-api
   description: Project about API gateways
-  host: "https://pub-api-gateway-8yny0kuq.ew.gateway.dev"
   version: 1.0.0
+host: pub-api-gateway-8yny0kuq.ew.gateway.dev
 schemes:
   - https
 produces:
