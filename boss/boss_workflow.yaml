@@ -1,0 +1,30 @@
+main:
+  steps:
+    #pullataan pubsub subscriptionin messaget:
+    - pull_message:
+        call: googleapis.pubsub.v1.projects.subscriptions.pull
+        args:
+          subscription: projects/week9-2-323806/subscriptions/karsimattomien_lokkien_subscription
+          body:
+            maxMessages: 10
+        result: pullMessageResult
+
+    #pubsubmessaget cloud functionsille
+    - call_function:
+        call: http.post
+        args:
+          url: https://us-central1-week9-2-323806.cloudfunctions.net/boss-ps-messagetime-function
+          body:
+            input: ${pullMessageResult["receivedMessages"]}
+        result: resp
+    - returnResult:
+        return: ${resp["body"]}
+# output tulee funktiosta stringinä, sanavälein eroteltuna, esim.:
+# "2021-08-25T06:29:18.522Z 2021-08-25T06:29:18.522Z 2021-08-25T07:37:43.856Z 2021-08-25T07:37:43.856Z 2021-08-25T10:42:42.172Z 2021-08-25T10:42:42.172Z 2021-08-25T07:08:36.297Z 2021-08-25T07:08:36.297Z 2021-08-25T07:08:36.297Z 2021-08-25T07:08:36.297Z"
+
+#jatkoon datan sijoitus storagebukettiin
+
+#omaan workflowhaaraan haettujen pubsub-messagejen acknowledgement, että vanhat viestit
+#kuittautuu pois
+#sitä varten erillinen funktio tai muu ratkaisu, jolla muokkaa messagesta ackId:n jatkokäyttöön
+##https://cloud.google.com/workflows/docs/reference/googleapis/pubsub/v1/projects.subscriptions/acknowledge
