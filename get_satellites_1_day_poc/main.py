@@ -53,8 +53,11 @@ def get_satellites(parameter):
     data = datareq.json()
     times = str(len(data))
     
-
-    return f"Today your boss has {times} chances to catch you drinking beers!"
+    if times == "0":
+      return f"No satellites over this pub today! What are you waiting for? To the pub, let's go!"
+    
+    else:
+      return f"Today your boss has {times} chances to catch you drinking beers! The satellite's name is ICEYE-X1."
 
 
 
