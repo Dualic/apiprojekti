@@ -2,7 +2,8 @@
 swagger: '2.0'
 info:
   title: pub-api
-  description: Sample API on API Gateway with a Google Cloud Functions backend
+  description: Project about API gateways
+  host: "https://pub-api-gateway-8yny0kuq.ew.gateway.dev"
   version: 1.0.0
 schemes:
   - https
@@ -19,7 +20,7 @@ paths:
         address: https://storage.googleapis.com/apiprojekti/publicstaticwebsite/index.html
       responses:
         '200':
-          description: Got the page
+          description: Displays the html page
           schema:
             type: string
 
@@ -42,10 +43,6 @@ paths:
           description: A successful response
           schema:
             type: string
-        '500':
-          description: Error in query. Maybe there is no pub of such name
-          schema:
-            type: string
   /pubday/{name_of_the_pub}:    
     get:
       parameters:
@@ -65,10 +62,6 @@ paths:
           description: A successful response
           schema:
             type: string
-        '500':
-          description: Error in query. Maybe there is no pub of such name
-          schema:
-            type: string
   /find:
     post:
       summary: Gives a name of a brewery that is close to the given coordinates
@@ -78,9 +71,5 @@ paths:
       responses:
         '200':
           description: No errors
-          schema:
-            type: string
-        '500':
-          description: Error in JSON. Please provide the POST request with JSON style {"longitude":-85.48, "latitude":42.95}
           schema:
             type: string
