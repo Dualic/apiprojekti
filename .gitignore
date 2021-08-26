@@ -1,3 +1,4 @@
 /venv
 mysecret.txt
 terraform/terraform.tfvars
+terraform/EI.json
